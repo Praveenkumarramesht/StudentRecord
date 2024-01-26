@@ -47,6 +47,31 @@ namespace EntityFramework
                 throw;
             }
         }
+        public IEnumerable<StudentDetails> GetAllDetails()
+        {
+            try
+            {
+                var result = _contxt.StudDetail.FromSqlRaw("select * from StudDetail").ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public StudentDetails GetbyID(long studentid)
+        {
+            try
+            {
+                var result = _contxt.StudDetail.FromSqlRaw<StudentDetails>($"select * from StudDetail where StudentID={studentid}");
+                return result.ToList().FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

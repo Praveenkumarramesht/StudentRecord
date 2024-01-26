@@ -8,10 +8,10 @@ namespace EntityFramework
 {
     public interface IStudentsRepository
     {
-        public void Inser(StudentDetails stud);
+        public void Insert(StudentDetails stud);
         public void Delete(long id);
         public void Update(long id, StudentDetails stud);
-        public IEnumerable<StudentDetails> GetStudentDetails();
+        public IEnumerable<StudentDetails> GetAllDetails();
         public StudentDetails GetbyID(long StudentID);
     }
 }
