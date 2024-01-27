@@ -15,44 +15,47 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DOB" class="control-label"></label>
                 <input asp-for="DOB" class="form-control" />
-                <span asp-validation-for="DOB" class="text-danger"></span>
+                <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
                 <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
+                <span asp-validation-for="Age" id="txtage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.LabelFor(Model=> Model.Gender, htmlAttributes: new {@class = "control label col-md-2"})
-                <div class="col-md-12">
-                    M
-                    @Html.RadioButtonFor(Model => Model.Gender, "Male")
-                    F
-                    @Html.RadioButtonFor(Model => Model.Gender, "Female")
-                </div>
+                <label asp-for="Gender"  class="control-label"></label><br />
+                <label>
+                    @Html.RadioButtonFor(Model => Model.Gender, "M")
+                    Male
+                </label><br />
+                <label>
+                               
+                    @Html.RadioButtonFor(Model => Model.Gender, "F")
+                    Female
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="MobileNum" class="control-label"></label>
                 <input asp-for="MobileNum" class="form-control" />
-                <span asp-validation-for="MobileNum" class="text-danger"></span>
+                <span asp-validation-for="MobileNum" id="txtmobile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Emailid" class="control-label"></label>
                 <input asp-for="Emailid" class="form-control" />
-                <span asp-validation-for="Emailid" class="text-danger"></span>
+                <span asp-validation-for="Emailid" id="txtemail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                 <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
+                <span asp-validation-for="Subject" id="txtsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="button" value="Create" id="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -63,5 +66,117 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/api/course",
+            data: "{}",
+            success: function (data) {
+                var string = '<option value = "-1">---please Select---</option>';
+                for (var i = 0; i < data.length; i++) {
+                    string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $("#txtsub").html(string);
+            }
+        });
+        $("#Create").click(function () {
+            
+            validate();
+        });
+    });
+    function validate() {
+        var name = document.getElementById("Name").value;
+        var age = document.getElementById("Age").value;
+       
+        var mobile = document.getElementById("MobileNum").value;
+        
+        var email = document.getElementById("Emailid").value;
+        var dob = document.getElementById("DOB").value;
+        @*var sub = document.getElementById("Subject").value;*@
+        @*var gender = document.getElementById("Gender").value;*@
+
+        var isvalid = true;
+        
+            var spanname = document.getElementById("txtname");
+            if (name == "" || name.length == 0) {
+                spanname.innerText = "Please Enter Your Name";
+                spanname.style.display = "block";
+
+                isvalid = false;
+            }
+            else
+            {
+                spanname.style.display = "none";
+            }
+
+        debugger;
+             var spanage = document.getElementById("txtage");
+            if (age <=0)
+            {
+                spanage.innerText = "Please Enter Valid Age";
+                spanage.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spanage.style.display = "none";
+            }
+
+            var spanmobile = document.getElementById("txtmobile");
+            if (mobile.length != 10)
+            {
+                spanmobile.innerText = "Please Enter Valid Mobile Number";
+                spanmobile.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spanmobile.style.display = "none";
+            }
+
+            var spanemail = document.getElementById("txtemail");
+            if (email == "") {
+                spanemail.innerText = "Please Enter Valid email";
+                spanemail.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spanemail.style.display = "none";
+            }
+
+            var spandob = document.getElementById("txtdob");
+            if (dob === "" || dob == "0001-01-01T00:00") {
+                spandob.innerText = "Please Enter your DOB";
+                spandob.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spandob.style.display = "none";
+            }
+
+            var spansub = document.getElementById("txtsub");
+            if (sub == "" || sub == "Please select") {
+                spansub.innerText = "Please Enter your Subject";
+                spansub.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spansub.style.display = "none";
+            }
+
+            var spangender = $("input[name='Gender']:checked").value("txtrgender");
+            if (!gender) {
+                spangender.innerText = "Please Enter your Gender";
+                spangender.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spangender.style.display = "none";
+            }
+           
+        
+        return isvalid
+    }
+   
+</script>
 }

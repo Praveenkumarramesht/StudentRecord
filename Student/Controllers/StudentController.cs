@@ -47,6 +47,7 @@ namespace Student.Controllers
             try
             {
                 var result = new StudentDetails();
+                result.Gender = "M";
                 return View("Create",result);
             }
             catch
