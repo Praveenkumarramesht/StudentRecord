@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
+               <select id="txtsub" class="form-control"></select>
                 <span asp-validation-for="Subject" id="txtsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -71,12 +71,12 @@
 
         $.ajax({
             type: "GET",
-            url: "/api/course",
+            url: "/api/Course",
             data: "{}",
             success: function (data) {
-                var string = '<option value = "-1">---please Select---</option>';
+                var string = '<option id="opt" value = "-1">---please Select---</option>';
                 for (var i = 0; i < data.length; i++) {
-                    string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    string += '<option value="' + data[i].id + '">' + data[i].subjects + '</option>';
                 }
                 $("#txtsub").html(string);
             }
@@ -154,7 +154,7 @@
                 spandob.style.display = "none";
             }
 
-            var spansub = document.getElementById("txtsub");
+           @* var spansub = document.getElementById("txtsub");
             if (sub == "" || sub == "Please select") {
                 spansub.innerText = "Please Enter your Subject";
                 spansub.style.display = "block";
@@ -162,9 +162,9 @@
             }
             else {
                 spansub.style.display = "none";
-            }
+            }*@
 
-            var spangender = $("input[name='Gender']:checked").value("txtrgender");
+            @*var spangender = $("input[name='Gender']:checked").value("txtrgender");
             if (!gender) {
                 spangender.innerText = "Please Enter your Gender";
                 spangender.style.display = "block";
@@ -172,7 +172,18 @@
             }
             else {
                 spangender.style.display = "none";
-            }
+        }*@
+        var drop = document.getElementById("txtsub");
+        var values = drop.options[drop.selectedIndex].value;
+        var change = document.getElementById("opt");
+        if (values == -1 || values == "") {
+            change.style.color = "red";
+            change.style.display = "block";
+            
+        }
+        else {
+            change.style.display = "none";
+        }
            
         
         return isvalid

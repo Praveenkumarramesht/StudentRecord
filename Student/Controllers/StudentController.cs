@@ -132,5 +132,45 @@ namespace Student.Controllers
                 return View();
             }
         }
+        private List<Subject> Getvalue()
+        {
+            try
+            {
+                List<Subject> Course = new List<Subject>();
+                Subject input = new Subject();
+                input.id = 1;
+                input.Subjects = "Tamil";
+                Subject input1 = new Subject();
+                input1.id = 2;
+                input1.Subjects = "Math";
+                Course.Add(input);
+                Subject input2 = new Subject();
+                input2.id = 3;
+                input2.Subjects = "English";
+                Course.Add(input);
+                Course.Add(input1);
+                Course.Add(input2);
+                return Course;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet]
+        [Route("~/api/Course")]
+        public ActionResult Subjectlist()
+        {
+            try
+            {
+                var get = Getvalue();
+                return Ok(get);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
