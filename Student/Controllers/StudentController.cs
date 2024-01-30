@@ -56,10 +56,10 @@ namespace Student.Controllers
             }
         }
 
-        // POST: StudentController/Create
+        // POST: StudentController/Creates
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(StudentDetails value)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Creates(StudentDetails value)
         {
             try
             {
@@ -143,7 +143,6 @@ namespace Student.Controllers
                 Subject input1 = new Subject();
                 input1.id = 2;
                 input1.Subjects = "Math";
-                Course.Add(input);
                 Subject input2 = new Subject();
                 input2.id = 3;
                 input2.Subjects = "English";
