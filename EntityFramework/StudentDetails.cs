@@ -5,6 +5,10 @@ namespace EntityFramework
 {
     public class StudentDetails
     {
+        public StudentDetails()
+        {
+            DOB = DateTime.Now;
+        }
         [Key]
         public long StudentID { get; set; }
         public string Name { get; set; }

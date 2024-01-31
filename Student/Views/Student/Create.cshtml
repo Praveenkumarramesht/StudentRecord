@@ -13,12 +13,15 @@
         <form asp-action="Create" id="myForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name" class="control-label"></label><br />
+                <input type ="text" id="name" placeholder=" Enter your Name" />
+                @*<input asp-for="Name" class="form-control" />*@
+
                 <span asp-validation-for="Name" id="chkname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DOB" class="control-label"></label>
+                
                 <input asp-for="DOB" class="form-control" />
                 <span asp-validation-for="DOB" id="chkdob" class="text-danger"></span>
             </div>
@@ -45,11 +48,12 @@
                     <input asp-for="Gender" class="form-control" />
                     <span asp-validation-for="Gender" class="text-danger"></span>
                 </div>*@
-            <div class="form-group">
-                <label asp-for="MobileNum" class="control-label"></label>
-                <input asp-for="MobileNum" class="form-control" />
-                <span asp-validation-for="MobileNum" id="chknum" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <label asp-for="MobileNum" class="control-label"></label>
+            @*<input asp-for="MobileNum" class="form-control" />*@
+            <input type="number" id="number" placeholder=" Enter your Mobile Number" />
+            <span asp-validation-for="MobileNum" id="chknum" class="text-danger"></span>
+        </div>
             <div class="form-group">
                 <label asp-for="Emailid" class="control-label"></label>
                 <input asp-for="Emailid" class="form-control" />
@@ -89,18 +93,25 @@
                 var name = document.getElementById("Name").value;
                 var dob = document.getElementById("DOB").value;
                 var age = document.getElementById("Age").value;
-                var gender = document.getElementById("Gender");
                 var num = document.getElementById("MobileNum").value;
                 var email = document.getElementById("Emailid").value;
                 var spansub = document.getElementById("drpsubject");
                 var sub = spansub.options[spansub.selectedIndex].value;
+                var radios = document.getElementsByName("radio");
+                var radgender = "";
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        radgender = radios[i].value;
+                        break;
+                    }
+                }
 
 
                 var resultdata = {
                     "Name": name,
                     "DOB": dob,
                     "Age": age,
-                    "Gender": gender,
+                    "Gender": radgender,
                     "MobileNum": num,
                     "Emailid": email,
                     "Subject": sub,
@@ -115,6 +126,7 @@
                     data: resultdata,
                     success: function (data) {
                         alert("success");
+                        window.location.href = "/Student/index";
                     }
 
                 });
