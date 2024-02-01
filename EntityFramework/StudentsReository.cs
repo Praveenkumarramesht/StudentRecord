@@ -24,7 +24,7 @@ namespace EntityFramework
             {
                 throw;
             }
-        }
+         }
         public void Update(long id, StudentDetails stud)
         {
             try

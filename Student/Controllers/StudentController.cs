@@ -42,13 +42,21 @@ namespace Student.Controllers
         }
 
         // GET: StudentController/Create
-        public ActionResult Create()
+        public ActionResult Create(long? id)
         {
             try
             {
-                var result = new StudentDetails();
-                result.Gender = "M";
-                return View("Create",result);
+                if (id.HasValue)
+                {
+                    var student = _add.GetbyID(id.Value);
+                    return View("Create", student);
+                }
+                else
+                {
+                    var result = new StudentDetails();
+                    result.Gender = "M";
+                    return View("Create", result);
+                }
             }
             catch
             {
@@ -63,8 +71,17 @@ namespace Student.Controllers
         {
             try
             {
-                _add.Insert(value);
-                return RedirectToAction(nameof(Index));
+
+                if (value.StudentID == 0)
+                {
+                    _add.Insert(value);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    _add.Update(value.StudentID,value);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
