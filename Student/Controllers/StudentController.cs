@@ -54,7 +54,6 @@ namespace Student.Controllers
                 else
                 {
                     var result = new StudentDetails();
-                    result.Gender = "M";
                     return View("Create", result);
                 }
             }

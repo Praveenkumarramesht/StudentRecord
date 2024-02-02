@@ -29,7 +29,7 @@ namespace EntityFramework
         {
             try
             {
-                var result = _contxt.Database.ExecuteSqlRaw($" update StudDetail set Name='{stud.Name}',DOB='{stud.DOB}',Age={stud.Age},Gender='{stud.Gender}',MobileNum='{stud.MobileNum}',Emailid='{stud.Emailid}',Subject='{stud.Subject}' where StudentID={id}");
+                var result = _contxt.Database.ExecuteSqlRaw($" update StudDetail set Name='{stud.Name}',DOB='{stud.DOB}',Age={stud.Age},Gender='{stud.Gender}',MobileNum={stud.MobileNum},Emailid='{stud.Emailid}',Subject='{stud.Subject}' where StudentID={id}");
             }
             catch (Exception ex)
             {
