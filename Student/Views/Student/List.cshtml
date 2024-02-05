@@ -3,6 +3,32 @@
 @{
     ViewData["Title"] = "List";
 }
+@section scripts{ 
+<script>
+    $(document).ready(function () {
+        $(".deletest").click(function () {
+            alert($(this).attr("data-id"));
+            alert($(this).attr("Data-Name"));
+            var id = $(this).attr("data-id");
+
+
+            if (confirm("Are you sure want to delete?")) {
+                var post = {
+                    "id": id
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Student/Deletes",
+                    data: post
+                });
+            }
+            else {
+                window.location.href = "/Login/Index";
+            }
+        })
+    });
+</script>
+}
 
 <h1>List</h1>
 
@@ -63,7 +89,7 @@
             <td>
                 <a asp-action="Create" asp-route-id="@item.StudentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
+                <a href="" class="deletest" Data-Name="@item.Name" data-id="@item.StudentID">Delete</a>
             </td>
         </tr>
 }

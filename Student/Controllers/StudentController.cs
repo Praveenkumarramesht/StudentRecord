@@ -136,11 +136,12 @@ namespace Student.Controllers
 
         // POST: StudentController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+       // [ValidateAntiForgeryToken]
+        public ActionResult Deletes(int id)
         {
             try
             {
+                _add.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
