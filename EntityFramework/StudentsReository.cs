@@ -42,7 +42,7 @@ namespace EntityFramework
             {
                 _contxt.Database.ExecuteSqlRaw($"delete StudDetail where StudentID={studentid}");
             }
-            catch (Exception ex)
+            catch (Exception ex)    
             {
                 throw;
             }
